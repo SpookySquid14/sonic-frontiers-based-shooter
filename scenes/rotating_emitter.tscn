@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgg1dvakh1ggd"]
+
+[ext_resource type="Texture2D" uid="uid://2urlgrihk8n1" path="res://sprites/enemy_sphere.png" id="1_l5g3j"]
+[ext_resource type="Script" uid="uid://o2rqa7dmrll" path="res://scripts/rotating_emitter.gd" id="1_n8e4m"]
+[ext_resource type="PackedScene" uid="uid://bxhkbw52fvf0u" path="res://scenes/enemy_bullet.tscn" id="2_4aj18"]
+
+[node name="Rotating Emitter" type="Node2D"]
+script = ExtResource("1_n8e4m")
+bullet = ExtResource("2_4aj18")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.43134, 0.43134, 0.43134, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_l5g3j")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

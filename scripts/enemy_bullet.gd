@@ -3,7 +3,7 @@ extends Area2D
 const SPEED = 200
 
 func _process(delta: float) -> void:
-	position.y += SPEED * delta
+	move_local_y(SPEED * delta)
 
 func _on_area_entered(area: Area2D) -> void:
 	print ("HIT" + String(area.name))
