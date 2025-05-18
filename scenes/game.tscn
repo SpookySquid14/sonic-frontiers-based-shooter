@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://du4dmsltrj1ao"]
+[gd_scene load_steps=5 format=3 uid="uid://du4dmsltrj1ao"]
 
-[ext_resource type="Script" uid="uid://b36ghxd25rfm7" path="res://scripts/manager.gd" id="1_lnu2h"]
+[ext_resource type="Script" uid="uid://b36ghxd25rfm7" path="res://scripts/game.gd" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://d4akhi8tpi3td" path="res://scenes/player.tscn" id="1_uwrxv"]
-[ext_resource type="PackedScene" uid="uid://bxhkbw52fvf0u" path="res://scenes/enemy_bullet.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bgg1dvakh1ggd" path="res://scenes/rotating_emitter.tscn" id="4_lbhrr"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
@@ -10,6 +9,7 @@ normal = Vector2(0, 1)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lnu2h")
+rotating_emitter = ExtResource("4_lbhrr")
 
 [node name="Manager" type="Node" parent="."]
 
@@ -28,25 +28,5 @@ collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
 shape = SubResource("WorldBoundaryShape2D_uwrxv")
-
-[node name="Enemy Bullets" type="Node" parent="."]
-
-[node name="EnemyBullet" parent="Enemy Bullets" instance=ExtResource("3_lnu2h")]
-position = Vector2(204, 81)
-
-[node name="EnemyBullet2" parent="Enemy Bullets" instance=ExtResource("3_lnu2h")]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(386, 48)
-collision_layer = 4
-collision_mask = 5
-
-[node name="EnemyBullet3" parent="Enemy Bullets" instance=ExtResource("3_lnu2h")]
-position = Vector2(678, 68)
-
-[node name="EnemyBullet4" parent="Enemy Bullets" instance=ExtResource("3_lnu2h")]
-position = Vector2(541, 97)
-
-[node name="Rotating Emitter" parent="." instance=ExtResource("4_lbhrr")]
-position = Vector2(794, 87)
 
 [connection signal="life_lost" from="Player" to="." method="_on_player_life_lost"]

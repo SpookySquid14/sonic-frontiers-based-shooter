@@ -8,6 +8,8 @@ var lives := 3
 @export var bullet: PackedScene
 @onready var bullet_origin: Node2D = $BulletOrigin
 signal life_lost
+@onready var death_timer: Timer = $DeathTimer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot_white"):
@@ -32,6 +34,13 @@ func shoot_bullet(col: int):
 func lose_a_life():
 	lives -= 1
 	life_lost.emit()
+	if lives <= 0:
+		die()
+
+func die():
+	animation_player.play("death")
+	Engine.time_scale = .75
+	death_timer.start()
 
 func _process(delta: float) -> void:
 	x_direction = Input.get_axis("move_left", "move_right")
@@ -46,3 +55,9 @@ func _process(delta: float) -> void:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
 
 	move_and_slide()
+
+
+func _on_death_timer_timeout() -> void:
+	Engine.time_scale = 1
+	get_tree().reload_current_scene()
+	pass # Replace with function body.

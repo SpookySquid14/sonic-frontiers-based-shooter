@@ -19,7 +19,6 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	shoot_bullet(color)
-	print("Timer Ran Out")
 	pass # Replace with function body.
 
 func shoot_bullet(col: int):
@@ -32,5 +31,5 @@ func shoot_bullet(col: int):
 		bullet_shot.collision_layer = 0b100
 		bullet_shot.collision_mask = 0b101
 		bullet_shot.modulate = Color("Black")
-	owner.add_child(bullet_shot)
+	get_parent().add_child(bullet_shot)
 	bullet_shot.transform = global_transform
